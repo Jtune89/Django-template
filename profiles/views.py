@@ -30,7 +30,8 @@ class ProfileDetail (APIView):
 
     def get(self, request, pk):
         profile = self.get_object(pk)
-        serializer = ProfileSerializer(profile, context={'request': request}
+        serializer = ProfileSerializer(
+            profile, context={'request': request}
         )
         return Response(serializer.data)
 
