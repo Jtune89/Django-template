@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
+from django.views.generic.edit import DeleteView
 
 
 class ProfileList(generics.ListAPIView):
@@ -44,4 +45,13 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         followers_count=Count('owner__followed', distinct=True),
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
+    serializer_class = ProfileSerializer
+
+
+class deleteProfile(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Delete your profile if you're the owner
+    """
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
