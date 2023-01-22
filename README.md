@@ -1,108 +1,83 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<img width="643" alt="logo" src="https://user-images.githubusercontent.com/95533259/213480611-0d2cd373-9949-4053-bd6e-2e1e788c8185.png">
 
-Welcome Jtune89,
+## This repository is the backend build for the front end React App - shared.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+- The DRF-API has been set up to handle Profiles, Posts, Likes, Authentication, Followers & other site functionality within Shared
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+### Functionality Includes (but is not limited to):
+- Allowing users to follow other users
+- Hosting the posts created by users
+- Allowing editing of those posts
+- Allowing an Admin SuperUser to manage all of the above where required
 
-## Gitpod Reminders
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+<img width="1301" alt="Screenshot 2023-01-22 at 10 05 19" src="https://user-images.githubusercontent.com/95533259/213910266-e6eb1b53-3e05-4ed7-bee4-3fd77f5c0488.png">
 
-`python3 -m http.server`
+### Comments / Likes / Posts
 
-A blue button should appear to click: _Make Public_,
+<img width="1196" alt="Screenshot 2023-01-22 at 10 17 17" src="https://user-images.githubusercontent.com/95533259/213910747-535dca9a-99bd-4c25-a4aa-c4f6919b5d7c.png">
 
-Another blue button should appear to click: _Open Browser_.
+Utilising Class based views, users are able to add comments onto the front end site, owners of the comments are able to edit and delete those comments.  Owners of the post that have been commented on, are able to see those comments.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+The use of models and serializers allows for the logic to function and enables the functionality for use.
 
-A blue button should appear to click: _Make Public_,
+In the API, you are able to see, the owner, created date/time of the like and the comment.
 
-Another blue button should appear to click: _Open Browser_.
+For posts, the API also handles filterset_fields which enable additional functionality on the app. I.E. I created additional filterset_fields to allow users to see posts which they own and had been commented on by other users as well as posts which they themselves have commented on, so they can see if anyone else is commenting back to them.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-To log into the Heroku toolbelt CLI:
+### Profiles
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+Allowing users to create profiles is the main point of the Shared app and therefore this functionality is essential.  With the API, the profiles functionality handles hosting of the profile and the key pieces of information.  I.E. cloudinary profile image link, username, created information etc.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+The profiles functionality also includes the filterset_fields which are essential to being able to build out the logic and various pages within the Shared App.
 
-------
+It also handles the option for users to delete their profile if they so wish, which will remove their profile from the site.
 
-## Release History
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## Build > Testing > Deployment
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+<img width="943" alt="Screenshot 2023-01-19 at 17 42 03" src="https://user-images.githubusercontent.com/95533259/213910796-078adb90-a77d-4ab8-9fb4-73d460bc4e2a.png">
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Build
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+I used the Code Institute "Django Rest Framework" walkthrough as the basis or the code and then built and developed additional functionality from there.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+Functionality that was required was outlined in the above wireframe which was also the basis for the User Stories on the Shared App Repo - https://github.com/Jtune89/jt_ms5_adfe
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+### Testing
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+With a backend/frontend built, quite a lot of testing is required.  As I would build new functionality within the frontend i.e. posts, I would then need to come back to the backend to ensure that the post was reflected in the posts API with the required information showing.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+This manual testing therefore extended to:
+- Posts - creating & deleting on a number of profiles
+- Comments - adding/deleting comments on a number of posts from different users
+- Likes - adding/removing likes on posts from different users
+- Profile creation - multiple profiles created
+- Profile deletion - multilpe profiles deleted
+- Adding/deleting  profile images - adding, removing, changing, removing multiple profile images from profiles
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+#### Testing Issues:
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+- Profile deletion - was a challenging build to implement.  It took a few attempts for the functionality to work and I had to test it a number of times to make sure that was it was completed, that it actually functioned to remove the profile from the API
+- Filterset_fields - this also took a number of tests as at first, the functionality to see posts that a user owned and had been commented on by others was not working and was showing all of the users posts.  Through persistent testing and checking and changing the code, I was able to build the functionality by creating new filterset_fields in the correct place.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+### Deployment:
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+This build is hosted on Heroku which has a number of requirements with the config vars to allow the functionality to be deployed and actually function.  I followed instructions outlined on the code institute walkthrough to enable the deployment and then tested that it was working once deployed.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+I outline on the Shared deployment that there were some issues where the functionality was not working as expected and the users could not see posts which required a change to the config vars to allow that to happen (the / at the end of the origin url was the issue).
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+### Credits:
+- Code Institute Django Framework walkthrough
+- Code Institute Tutor Support
+- Slack Community
+- Stack Overflow
+- Various Google Resources
 
-## FAQ about the uptime script
 
-**Why have you added this script?**
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
 
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
